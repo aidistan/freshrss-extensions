@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "docker-run",
+            "label": "docker-dev",
+            "dockerRun": {
+                "containerName": "freshrss-extensions",
+                "image": "freshrss/freshrss:latest",
+                "options": [
+                    "--rm",
+                ],
+                "ports": [
+                    {
+                        "containerPort": 80,
+                        "hostPort": 3000
+                    }
+                ],
+                "volumes": [
+                    {
+                        "containerPath": "/var/www/FreshRSS/extensions",
+                        "localPath": "${workspaceFolder}"
+                    }
+                ],
+                "remove": true
+            }
+        }
+    ]
+}
