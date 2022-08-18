@@ -11,9 +11,6 @@
         <label class="group-name" for="light_theme"><?= _t('ext.sync_with_system_theme.light_theme') ?></label>
         <div class="group-controls">
             <select name="light_theme" required="" data-leave-validation="<?= $lightTheme ?>">
-                <option value="null" <?= $light_theme === null ? 'selected="selected"' : '' ?>>
-                    <?= _t('ext.sync_with_system_theme.not_set') ?>
-                </option>
                 <?php foreach($themes as $theme) { ?>
                     <option value="<?= $theme['id'] ?>" <?= $theme['id'] === $lightTheme ? 'selected="selected"' : '' ?>>
                         <?= $theme['name'] ?>
@@ -27,9 +24,6 @@
         <label class="group-name" for="dark_theme"><?= _t('ext.sync_with_system_theme.dark_theme') ?></label>
         <div class="group-controls">
             <select name="dark_theme" required="" data-leave-validation="<?= $darkTheme ?>">
-                <option value="null" <?= $dark_theme === null ? 'selected="selected"' : '' ?>>
-                    <?= _t('ext.sync_with_system_theme.not_set') ?>
-                </option>
                 <?php foreach($themes as $theme) { ?>
                     <option value="<?= $theme['id'] ?>" <?= $theme['id'] === $darkTheme ? 'selected="selected"' : '' ?>>
                         <?= $theme['name'] ?>

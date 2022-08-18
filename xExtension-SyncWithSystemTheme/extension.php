@@ -2,26 +2,36 @@
 
 class SyncWithSystemThemeExtension extends Minz_Extension {
 
+    public function install() {
+        FreshRSS_Context::$user_conf->dark_theme = FreshRSS_Context::$user_conf->theme;
+        FreshRSS_Context::$user_conf->light_theme = FreshRSS_Context::$user_conf->theme;
+        FreshRSS_Context::$user_conf->save();
+		return true;
+	}
+
     public function init() {
+        $this->registerTranslates();
         $this->registerHook('js_vars', array($this, 'providePreferredThemesInJs'));
         Minz_View::appendScript($this->getFileUrl('syncWithSystemTheme.js', 'js'));
     }
 
     public function handleConfigureAction() {
-        $this->registerTranslates();
-
         if (Minz_Request::isPost()) {
-            FreshRSS_Context::$user_conf->light_theme = Minz_Request::param('light_theme', null);
-            FreshRSS_Context::$user_conf->dark_theme = Minz_Request::param('dark_theme', null);
+            foreach (['dark_theme', 'light_theme', 'theme'] as $param) {
+                if (Minz_Request::param($param)) {
+                    FreshRSS_Context::$user_conf->_param($param, Minz_Request::param($param));
+                }
+            }
             FreshRSS_Context::$user_conf->save();
         }
     }
 
     public function providePreferredThemesInJs($vars) {
-        $vars["SyncWithSystemTheme"] = array(
-            "lightTheme" => FreshRSS_Context::$user_conf->light_theme,
-            "darkTheme" => FreshRSS_Context::$user_conf->dark_theme,
-            "csrfToken" => FreshRSS_Auth::csrfToken()
+        $vars['SyncWithSystemTheme'] = array(
+            'darkTheme' => FreshRSS_Context::$user_conf->dark_theme,
+            'lightTheme' => FreshRSS_Context::$user_conf->light_theme,
+            'postUrl' => _url('extension', 'configure', 'e', $this->getName()),
+            'warning' => _t('ext.sync_with_system_theme.warning')
         );
 
         return $vars;
