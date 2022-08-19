@@ -1,5 +1,15 @@
 window.addEventListener('load', () => {
 
+    (() => {
+        const context = window.context.extensions.SyncWithSystemTheme
+
+        // Decode double-html-encoded postUrl
+        const txt = document.createElement('textarea')
+        txt.innerHTML = context.postUrl // once for js_vars
+        txt.innerHTML = txt.value       // once for _url
+        context.postUrl = txt.value
+    })()
+
     function getCurrentTheme() {
         for (node of document.querySelectorAll('link[rel="stylesheet"]')) {
             const match = new RegExp('/themes/([^/]+)/').exec(node.attributes.href.value)
@@ -17,13 +27,13 @@ window.addEventListener('load', () => {
         }
     }
 
-    function syncWithSystemTheme() {
+    function syncWithSystemTheme(callTiming) {
         const theme = getCurrentTheme()
         const scheme = getPreferredColorScheme()
-        const preferredTheme = extContext[scheme + 'Theme']
+        const preferredTheme = context.extensions.SyncWithSystemTheme[scheme + 'Theme']
 
         if (preferredTheme && theme !== preferredTheme) {
-            fetch(extContext.postUrl, {
+            fetch(context.extensions.SyncWithSystemTheme.postUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -31,23 +41,21 @@ window.addEventListener('load', () => {
                     theme: preferredTheme
                 })
             })
-            // Only fresh the page if not reading
-            .then(() => !['normal', 'global', 'reader'].includes(context.current_view) && location.reload())
+            .then(() => {
+                const duringReading = callTiming === 'onChange' &&
+                    ['normal', 'global', 'reader'].includes(context.current_view)
+
+                if (!duringReading) location.reload()
+            })
         }
     }
 
-    const extContext = context.extensions.SyncWithSystemTheme
-
-    // To decode html-encoded postUrl
-    const txt = document.createElement('textarea')
-    txt.innerHTML = extContext.postUrl // once for js_vars
-    txt.innerHTML = txt.value          // once for _url
-    extContext.postUrl = txt.value
-
     if (window.matchMedia) {
-        syncWithSystemTheme()
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncWithSystemTheme)
+        syncWithSystemTheme('onLoad')
+
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', () => syncWithSystemTheme('onChange'))
     } else {
-        console.log(extContext.warning)
+        console.log(context.extensions.SyncWithSystemTheme.warning)
     }
 })
