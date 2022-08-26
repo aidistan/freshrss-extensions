@@ -1,0 +1,19 @@
+.feed-priority-shortcut {
+    float: right;
+}
+
+.feed-priority-shortcut .dropdown-toggle:hover {
+    text-decoration: none;
+}
+
+.feed-priority-shortcut .dropdown-menu {
+    min-width: 6.42rem;
+    padding: 0;
+}
+
+.feed-priority-shortcut .dropdown-menu .item {
+    display: inline-block;
+    width: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
