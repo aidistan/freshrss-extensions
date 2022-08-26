@@ -11,7 +11,7 @@ class ThemeModeSynchronizerExtension extends Minz_Extension {
 
     public function init() {
         $this->registerTranslates();
-        $this->registerHook('js_vars', array($this, 'providePreferredThemesInJs'));
+        $this->registerHook('js_vars', [$this, 'providePreferredThemesInJs']);
         Minz_View::appendScript($this->getFileUrl('main.js', 'js'));
     }
 
@@ -27,13 +27,11 @@ class ThemeModeSynchronizerExtension extends Minz_Extension {
     }
 
     public function providePreferredThemesInJs($vars) {
-        $vars['ThemeModeSynchronizer'] = array(
+        return array_merge($vars, ['ThemeModeSynchronizer' => [
             'darkTheme' => FreshRSS_Context::$user_conf->dark_theme,
             'lightTheme' => FreshRSS_Context::$user_conf->light_theme,
             'postUrl' => _url('extension', 'configure', 'e', $this->getName()),
             'warning' => _t('ext.theme_mode_synchronizer.warning')
-        );
-
-        return $vars;
+        ]]);
     }
 }
