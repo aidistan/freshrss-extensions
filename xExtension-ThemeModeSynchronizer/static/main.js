@@ -1,7 +1,7 @@
 window.addEventListener('load', () => {
 
     (() => {
-        const context = window.context.extensions.SyncWithSystemTheme
+        const context = window.context.extensions.ThemeModeSynchronizer
 
         // Decode double-html-encoded postUrl
         const txt = document.createElement('textarea')
@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         }
     }
 
-    function getPreferredColorScheme() {
+    function getSystemMode() {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             return 'dark'
         } else {
@@ -27,13 +27,12 @@ window.addEventListener('load', () => {
         }
     }
 
-    function syncWithSystemTheme(callTiming) {
+    function syncWithSystemMode(callTiming) {
         const theme = getCurrentTheme()
-        const scheme = getPreferredColorScheme()
-        const preferredTheme = context.extensions.SyncWithSystemTheme[scheme + 'Theme']
+        const preferredTheme = context.extensions.ThemeModeSynchronizer[getSystemMode() + 'Theme']
 
         if (preferredTheme && theme !== preferredTheme) {
-            fetch(context.extensions.SyncWithSystemTheme.postUrl, {
+            fetch(context.extensions.ThemeModeSynchronizer.postUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -51,11 +50,11 @@ window.addEventListener('load', () => {
     }
 
     if (window.matchMedia) {
-        syncWithSystemTheme('onLoad')
+        syncWithSystemMode('onLoad')
 
         window.matchMedia('(prefers-color-scheme: dark)')
-            .addEventListener('change', () => syncWithSystemTheme('onChange'))
+            .addEventListener('change', () => syncWithSystemMode('onChange'))
     } else {
-        console.log(context.extensions.SyncWithSystemTheme.warning)
+        console.log(context.extensions.ThemeModeSynchronizer.warning)
     }
 })

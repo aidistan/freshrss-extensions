@@ -8,7 +8,7 @@
     ?>
 
     <div class="form-group">
-        <label class="group-name" for="light_theme"><?= _t('ext.sync_with_system_theme.light_theme') ?></label>
+        <label class="group-name" for="light_theme"><?= _t('ext.theme_mode_synchronizer.light_theme') ?></label>
         <div class="group-controls">
             <select name="light_theme" required="" data-leave-validation="<?= $lightTheme ?>">
                 <?php foreach($themes as $theme) { ?>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group">
-        <label class="group-name" for="dark_theme"><?= _t('ext.sync_with_system_theme.dark_theme') ?></label>
+        <label class="group-name" for="dark_theme"><?= _t('ext.theme_mode_synchronizer.dark_theme') ?></label>
         <div class="group-controls">
             <select name="dark_theme" required="" data-leave-validation="<?= $darkTheme ?>">
                 <?php foreach($themes as $theme) { ?>

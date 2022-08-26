@@ -1,6 +1,6 @@
 <?php
 
-class SyncWithSystemThemeExtension extends Minz_Extension {
+class ThemeModeSynchronizerExtension extends Minz_Extension {
 
     public function install() {
         FreshRSS_Context::$user_conf->dark_theme = FreshRSS_Context::$user_conf->theme;
@@ -12,7 +12,7 @@ class SyncWithSystemThemeExtension extends Minz_Extension {
     public function init() {
         $this->registerTranslates();
         $this->registerHook('js_vars', array($this, 'providePreferredThemesInJs'));
-        Minz_View::appendScript($this->getFileUrl('syncWithSystemTheme.js', 'js'));
+        Minz_View::appendScript($this->getFileUrl('main.js', 'js'));
     }
 
     public function handleConfigureAction() {
@@ -27,11 +27,11 @@ class SyncWithSystemThemeExtension extends Minz_Extension {
     }
 
     public function providePreferredThemesInJs($vars) {
-        $vars['SyncWithSystemTheme'] = array(
+        $vars['ThemeModeSynchronizer'] = array(
             'darkTheme' => FreshRSS_Context::$user_conf->dark_theme,
             'lightTheme' => FreshRSS_Context::$user_conf->light_theme,
             'postUrl' => _url('extension', 'configure', 'e', $this->getName()),
-            'warning' => _t('ext.sync_with_system_theme.warning')
+            'warning' => _t('ext.theme_mode_synchronizer.warning')
         );
 
         return $vars;

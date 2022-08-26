@@ -1,0 +1,8 @@
+{
+    "name": "Theme Mode Synchronizer",
+    "author": "Aidi Stan",
+    "description": "Synchronize the theme with your system light/dark mode",
+    "version": "1.1.1",
+    "entrypoint": "ThemeModeSynchronizer",
+    "type": "user"
+}

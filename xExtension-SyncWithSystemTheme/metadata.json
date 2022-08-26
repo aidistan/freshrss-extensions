@@ -1,8 +1,0 @@
-{
-    "name": "Sync with System Theme",
-    "author": "Aidi Stan",
-    "description": "Synchronize the theme with your system theme mode",
-    "version": "1.1.1",
-    "entrypoint": "SyncWithSystemTheme",
-    "type": "user"
-}
