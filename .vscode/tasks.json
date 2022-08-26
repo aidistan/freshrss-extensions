@@ -6,7 +6,7 @@
             "label": "docker-dev",
             "dockerRun": {
                 "containerName": "freshrss-extensions",
-                "image": "freshrss/freshrss:latest",
+                "image": "freshrss/freshrss:edge",
                 "options": [
                     "--rm",
                 ],
