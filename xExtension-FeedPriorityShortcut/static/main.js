@@ -23,11 +23,11 @@ window.addEventListener('load', () => {
             `<div id="dropdown-feed-${i}" class="dropdown-target"></div>
             <a class="dropdown-toggle" href="#dropdown-feed-${i}">${p}</a>
             <ul class="dropdown-menu">
-                <li class="dropdown-close"><a href="#close">❌</a></li>
                 <li class="item">🏠</li>
                 <li class="item">📁</li>
                 <li class="item">🔒</li>
-            </ul>`
+            </ul>
+            <a class="dropdown-close" href="#close">❌</a>`
 
         li.appendChild(d)
     })
