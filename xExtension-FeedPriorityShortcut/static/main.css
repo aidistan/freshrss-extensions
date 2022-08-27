@@ -7,8 +7,20 @@
 }
 
 .feed-priority-shortcut .dropdown-menu {
-    min-width: 6.42rem;
+    min-width: calc(6rem + 7px);
     padding: 0;
+}
+
+@media (max-width: 840px) {
+    .feed-priority-shortcut.dropdown {
+        position: relative;
+    }
+
+    .feed-priority-shortcut .dropdown-menu {
+        width: calc(6rem + 7px);
+        left: inherit;
+        right: 0px;
+    }
 }
 
 .feed-priority-shortcut .dropdown-menu .item {
