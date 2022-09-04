@@ -49,12 +49,14 @@ window.addEventListener('load', () => {
         }
     }
 
-    if (window.matchMedia) {
+    if (context.anonymous) {
+        return console.log(context.extensions.ThemeModeSynchronizer.warning.anonymous)
+    } else if (!window.matchMedia) {
+        return console.log(context.extensions.ThemeModeSynchronizer.warning.unsupported)
+    } else {
         syncWithSystemMode('onLoad')
 
         window.matchMedia('(prefers-color-scheme: dark)')
             .addEventListener('change', () => syncWithSystemMode('onChange'))
-    } else {
-        console.log(context.extensions.ThemeModeSynchronizer.warning)
     }
 })

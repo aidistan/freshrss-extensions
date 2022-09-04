@@ -31,7 +31,12 @@ class ThemeModeSynchronizerExtension extends Minz_Extension {
             'darkTheme' => FreshRSS_Context::$user_conf->dark_theme,
             'lightTheme' => FreshRSS_Context::$user_conf->light_theme,
             'postUrl' => _url('extension', 'configure', 'e', $this->getName()),
-            'warning' => _t('ext.theme_mode_synchronizer.warning')
+            'warning' => array_map(function($value) {
+                return _t('ext.theme_mode_synchronizer.warning.' . $value);
+            }, [
+                'anonymous' => 'anonymous',
+                'unsupported' => 'unsupported'
+            ])
         ]]);
     }
 }
