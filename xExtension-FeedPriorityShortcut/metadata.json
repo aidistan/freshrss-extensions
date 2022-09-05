@@ -1,7 +1,7 @@
 {
     "name": "Feed Priority Shortcut",
     "author": "Aidi Stan",
-    "description": "Quick setter for your feed priorities",
+    "description": "Set up visibilities/priorities of your feeds easily",
     "version": "1.0.1",
     "entrypoint": "FeedPriorityShortcut",
     "type": "user"
