@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
 
     function getCurrentTheme() {
         for (node of document.querySelectorAll('link[rel="stylesheet"]')) {
-            const match = new RegExp('/themes/([^/]+)/').exec(node.attributes.href.value)
+            const match = new RegExp('/themes/([^/]+)/').exec(node.attributes.href?.value)
             if (match && match[1] !== 'base-theme') {
                 return match[1]
             }
