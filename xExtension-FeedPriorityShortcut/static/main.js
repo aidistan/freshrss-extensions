@@ -23,9 +23,9 @@ window.addEventListener('load', () => {
             `<div id="dropdown-feed-${i}" class="dropdown-target"></div>
             <a class="dropdown-toggle" href="#dropdown-feed-${i}">${p}</a>
             <ul class="dropdown-menu">
-                <li class="item">🏠</li>
-                <li class="item">📁</li>
-                <li class="item">🔒</li>
+                <li class="item" title="Mainstream">🏠</li>
+                <li class="item" title="Normal">📁</li>
+                <li class="item" title="Archived">🔒</li>
             </ul>
             <a class="dropdown-close" href="#close">❌</a>`
 
