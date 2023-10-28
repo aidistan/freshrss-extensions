@@ -34,7 +34,12 @@ class FeedPriorityShortcutExtension extends Minz_Extension {
                     FreshRSS_Feed::PRIORITY_NORMAL => '📁',
                     FreshRSS_Feed::PRIORITY_ARCHIVED => '🔒'
                 ][$feed -> priority()];
-            }, $feedDAO->listFeeds())
+            }, $feedDAO->listFeeds()),
+            'tooltips' => array(
+                'main_stream' => _t('sub.feed.priority.main_stream'),
+                'normal' => _t('sub.feed.priority.normal'),
+                'archived' => _t('sub.feed.priority.archived')
+            )
         ]]);
     }
 }
