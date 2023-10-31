@@ -16,6 +16,7 @@ window.addEventListener('load', () => {
 
         const i = li.dataset.feedId
         const p = context.extensions.FeedPriorityShortcut.priority[i]
+        const t = context.extensions.FeedPriorityShortcut.tooltips
         const d = document.createElement('div')
 
         d.classList.add('feed-priority-shortcut', 'dropdown')
@@ -23,9 +24,9 @@ window.addEventListener('load', () => {
             `<div id="dropdown-feed-${i}" class="dropdown-target"></div>
             <a class="dropdown-toggle" href="#dropdown-feed-${i}">${p}</a>
             <ul class="dropdown-menu">
-                <li class="item">🏠</li>
-                <li class="item">📁</li>
-                <li class="item">🔒</li>
+                <li class="item" title="${t.main_stream}">🏠</li>
+                <li class="item" title="${t.normal}">📁</li>
+                <li class="item" title="${t.archived}">🔒</li>
             </ul>
             <a class="dropdown-close" href="#close">❌</a>`
 
