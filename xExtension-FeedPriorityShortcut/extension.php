@@ -15,8 +15,9 @@ class FeedPriorityShortcutExtension extends Minz_Extension {
             $feedDAO = FreshRSS_Factory::createFeedDao();
             $feedDAO->updateFeed(Minz_Request::param('feed_id'), [
                 'priority' => [
+                    '📌' => FreshRSS_Feed::PRIORITY_IMPORTANT,
                     '🏠' => FreshRSS_Feed::PRIORITY_MAIN_STREAM,
-                    '📁' => FreshRSS_Feed::PRIORITY_NORMAL,
+                    '📁' => FreshRSS_Feed::PRIORITY_CATEGORY,
                     '🔒' => FreshRSS_Feed::PRIORITY_ARCHIVED
                 ][Minz_Request::param('priority')]
             ]);
@@ -30,14 +31,16 @@ class FeedPriorityShortcutExtension extends Minz_Extension {
             'postUrl' => _url('extension', 'configure', 'e', $this->getName()),
             'priority' => array_map(function($feed) {
                 return [
+                    FreshRSS_Feed::PRIORITY_IMPORTANT => '📌',
                     FreshRSS_Feed::PRIORITY_MAIN_STREAM => '🏠',
-                    FreshRSS_Feed::PRIORITY_NORMAL => '📁',
+                    FreshRSS_Feed::PRIORITY_CATEGORY => '📁',
                     FreshRSS_Feed::PRIORITY_ARCHIVED => '🔒'
                 ][$feed -> priority()];
             }, $feedDAO->listFeeds()),
             'tooltips' => array(
+                'important' => _t('sub.feed.priority.important'),
                 'main_stream' => _t('sub.feed.priority.main_stream'),
-                'normal' => _t('sub.feed.priority.normal'),
+                'category' => _t('sub.feed.priority.category'),
                 'archived' => _t('sub.feed.priority.archived')
             )
         ]]);
