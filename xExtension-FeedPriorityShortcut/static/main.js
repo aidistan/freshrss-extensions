@@ -1,28 +1,26 @@
 window.addEventListener('load', () => {
-
+    // Pre-process vars from PHP
     (() => {
-        const context = window.context.extensions.FeedPriorityShortcut
+        const extContext = window.context.extensions.FeedPriorityShortcut
 
         // Decode double-html-encoded postUrl
-        const txt = document.createElement('textarea')
-        txt.innerHTML = context.postUrl // once for js_vars
-        txt.innerHTML = txt.value       // once for _url
-        context.postUrl = txt.value
+        const textarea = document.createElement('textarea')
+        textarea.innerHTML = extContext.postUrl // once for js_vars
+        textarea.innerHTML = textarea.value     // once for _url
+        extContext.postUrl = textarea.value
     })()
 
     // Add dropdowns
-    document.querySelectorAll('.feed.item').forEach((li) => {
-        if (!li.dataset.feedId) { return }
-
+    document.querySelectorAll('.feed.item[data-feed-id]').forEach((li) => {
         const i = li.dataset.feedId
-        const p = context.extensions.FeedPriorityShortcut.priority[i]
+        const e = context.extensions.FeedPriorityShortcut.priorityEmojis[i]
         const t = context.extensions.FeedPriorityShortcut.tooltips
         const d = document.createElement('div')
 
         d.classList.add('feed-priority-shortcut', 'dropdown')
         d.innerHTML =
             `<div id="dropdown-feed-${i}" class="dropdown-target"></div>
-            <a class="dropdown-toggle" href="#dropdown-feed-${i}">${p}</a>
+            <a class="dropdown-toggle" href="#dropdown-feed-${i}">${e}</a>
             <ul class="dropdown-menu">
                 <li class="item" title="${t.important}">📌</li>
                 <li class="item" title="${t.main_stream}">🏠</li>
