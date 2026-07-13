@@ -18,7 +18,8 @@ class FeedPriorityShortcutExtension extends Minz_Extension {
                     '📌' => FreshRSS_Feed::PRIORITY_IMPORTANT,
                     '🏠' => FreshRSS_Feed::PRIORITY_MAIN_STREAM,
                     '📁' => FreshRSS_Feed::PRIORITY_CATEGORY,
-                    '🔒' => FreshRSS_Feed::PRIORITY_ARCHIVED
+                    '📃' => FreshRSS_Feed::PRIORITY_FEED,
+                    '🔒' => FreshRSS_Feed::PRIORITY_HIDDEN
                 ][Minz_Request::param('priority')]
             ]);
         }
@@ -34,14 +35,16 @@ class FeedPriorityShortcutExtension extends Minz_Extension {
                     FreshRSS_Feed::PRIORITY_IMPORTANT => '📌',
                     FreshRSS_Feed::PRIORITY_MAIN_STREAM => '🏠',
                     FreshRSS_Feed::PRIORITY_CATEGORY => '📁',
-                    FreshRSS_Feed::PRIORITY_ARCHIVED => '🔒'
+                    FreshRSS_Feed::PRIORITY_FEED => '📃',
+                    FreshRSS_Feed::PRIORITY_HIDDEN => '🔒'
                 ][$feed -> priority()];
             }, $feedDAO->listFeeds()),
             'tooltips' => array(
                 'important' => _t('sub.feed.priority.important'),
                 'main_stream' => _t('sub.feed.priority.main_stream'),
                 'category' => _t('sub.feed.priority.category'),
-                'archived' => _t('sub.feed.priority.archived')
+                'feed' => _t('sub.feed.priority.feed'),
+                'hidden' => _t('sub.feed.priority.hidden')
             )
         ]]);
     }

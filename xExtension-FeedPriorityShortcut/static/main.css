@@ -7,7 +7,7 @@
 }
 
 .feed-priority-shortcut .dropdown-menu {
-    min-width: calc(8rem + 10px);
+    min-width: calc(10rem + 14px);
     padding: 5px;
     text-indent: 0;
 }
@@ -18,7 +18,7 @@
     }
 
     .feed-priority-shortcut .dropdown-menu {
-        width: calc(8rem + 10px);
+        width: calc(10rem + 14px);
         left: inherit;
         right: 0px;
     }

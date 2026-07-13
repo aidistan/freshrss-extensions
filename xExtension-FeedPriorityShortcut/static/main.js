@@ -27,7 +27,8 @@ window.addEventListener('load', () => {
                 <li class="item" title="${t.important}">📌</li>
                 <li class="item" title="${t.main_stream}">🏠</li>
                 <li class="item" title="${t.category}">📁</li>
-                <li class="item" title="${t.archived}">🔒</li>
+                <li class="item" title="${t.feed}">📃</li>
+                <li class="item" title="${t.hidden}">🔒</li>
             </ul>
             <a class="dropdown-close" href="#close">❌</a>`
 
