@@ -1,0 +1,8 @@
+services:
+  freshrss:
+    image: freshrss/freshrss:edge
+    container_name: freshrss-extensions
+    ports:
+      - "3000:80"
+    volumes:
+      - ./:/var/www/FreshRSS/extensions

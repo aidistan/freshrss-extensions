@@ -1,7 +1,5 @@
 # FreshRSS extensions
 
-> **NOTE for edge users**: please use the versions in [edge branch](https://github.com/aidistan/freshrss-extensions/tree/edge) instead.
-
 This repository contains all my custom FreshRSS extensions.
 
 ## How to install?
